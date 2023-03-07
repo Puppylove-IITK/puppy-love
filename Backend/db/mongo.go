@@ -14,7 +14,7 @@ type PuppyDb struct {
 
 func MongoConnect() (*PuppyDb, error) {
 	// Set your MongoDB Atlas connection string here.
-	connectionString := "mongodb+srv://aleatoryfreak:<password>@puppylove.woq42jd.mongodb.net/?retryWrites=true&w=majority"
+	connectionString := "mongodb+srv://username:securepassword@puppylove.woq42jd.mongodb.net/?retryWrites=true&w=majority"
 
 	// Set client options.
 	clientOptions := options.Client().ApplyURI(connectionString)

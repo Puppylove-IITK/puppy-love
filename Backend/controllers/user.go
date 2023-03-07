@@ -165,9 +165,7 @@ func UserFirst(c *gin.Context) {
 	}
 
 	if updateResult.ModifiedCount == 0 {
-		c.AbortWithStatus(http.StatusInternalServerError)
-		log.Print(err)
-		return
+		// Handle case when user not found
 	}
 
 	// Remove user's auth token
@@ -181,6 +179,7 @@ func UserFirst(c *gin.Context) {
 	c.JSON(http.StatusAccepted, "Information set up")
 }
 
+
 // User asking for email
 // ---------------------
 func UserMail(c *gin.Context) {
@@ -193,7 +192,7 @@ func UserMail(c *gin.Context) {
 
 	u := mailData{}
 
-	if err := Db.GetCollection("user").FindOne(context.Background(), bson.M{"_id": id}).Decode(&u); err != nil {
+	if err := Db.GetCollection("user").FindOne(context.Background(), bson.M{"id": id}).Decode(&u); err != nil {
 		if err == mongo.ErrNoDocuments {
 			c.AbortWithStatus(http.StatusNotFound)
 		} else {
